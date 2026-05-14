@@ -1,13 +1,23 @@
 import { Router } from 'express';
 import pool from '../db.js';
+import { authMiddleware } from '../middleware/auth.js';
 
 const router = Router();
+
+router.use(authMiddleware);
 
 // GET /api/locations
 router.get('/', async (req, res) => {
   try {
-    const result = await pool.query('SELECT * FROM locations ORDER BY recorded_at DESC');
-    res.json({ success: true, data: result.rows });
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 20;
+    const offset = (page - 1) * limit;
+
+    const countResult = await pool.query('SELECT COUNT(*) FROM locations');
+    const total = parseInt(countResult.rows[0].count);
+    const result = await pool.query('SELECT * FROM locations ORDER BY recorded_at DESC LIMIT $1 OFFSET $2', [limit, offset]);
+
+    res.json({ success: true, data: result.rows, pagination: { page, limit, total, totalPages: Math.ceil(total / limit) } });
   } catch (error) {
     console.error('Get locations error:', error);
     res.status(500).json({ success: false, error: 'Internal server error' });

@@ -11,6 +11,7 @@ import {
   MapPin,
   ShieldAlert,
   Activity,
+  Siren,
 } from 'lucide-react';
 import api from '../services/api';
 
@@ -116,6 +117,8 @@ export default function DashboardPage() {
   const [incidents, setIncidents] = useState([]);
   const [emergencies, setEmergencies] = useState([]);
   const [checkins, setCheckins] = useState([]);
+  const [sosLoading, setSosLoading] = useState(false);
+  const [sosMessage, setSosMessage] = useState('');
 
   useEffect(() => {
     async function fetchData() {
@@ -127,10 +130,10 @@ export default function DashboardPage() {
           api.get('/emergencies'),
           api.get('/checkins'),
         ]);
-        setWorkers(wRes.data);
-        setIncidents(iRes.data);
-        setEmergencies(eRes.data);
-        setCheckins(cRes.data);
+        setWorkers(wRes.data.data || wRes.data);
+        setIncidents(iRes.data.data || iRes.data);
+        setEmergencies(eRes.data.data || eRes.data);
+        setCheckins(cRes.data.data || cRes.data);
       } catch (err) {
         console.error('Dashboard fetch error:', err);
       } finally {
@@ -139,6 +142,21 @@ export default function DashboardPage() {
     }
     fetchData();
   }, []);
+
+  const handleSOS = async () => {
+    const workerId = prompt('Enter Worker ID for SOS alert:');
+    if (!workerId) return;
+    setSosLoading(true);
+    setSosMessage('');
+    try {
+      await api.post('/sos', { worker_id: parseInt(workerId), description: 'SOS triggered from dashboard' });
+      setSosMessage('SOS alert sent successfully! Emergency services notified.');
+    } catch (err) {
+      setSosMessage('Failed to send SOS: ' + (err.response?.data?.error || err.message));
+    } finally {
+      setSosLoading(false);
+    }
+  };
 
   if (loading) {
     return (
@@ -193,10 +211,27 @@ export default function DashboardPage() {
 
   return (
     <div className="space-y-6">
-      {/* Page header */}
-      <div>
-        <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
-        <p className="text-sm text-gray-500 mt-1">Overview of your lone worker safety operations</p>
+      {/* Page header with SOS button */}
+      <div className="flex items-start justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
+          <p className="text-sm text-gray-500 mt-1">Overview of your lone worker safety operations</p>
+        </div>
+        <div className="flex flex-col items-end gap-2">
+          <button
+            onClick={handleSOS}
+            disabled={sosLoading}
+            className="flex items-center gap-2 px-5 py-3 bg-red-600 hover:bg-red-700 disabled:bg-red-400 text-white font-bold rounded-xl shadow-lg shadow-red-500/30 transition-all active:scale-95 text-sm uppercase tracking-wide"
+          >
+            <Siren className="w-5 h-5" />
+            {sosLoading ? 'Sending SOS...' : 'SOS Emergency'}
+          </button>
+          {sosMessage && (
+            <p className={`text-xs font-medium ${sosMessage.startsWith('Failed') ? 'text-red-600' : 'text-green-600'}`}>
+              {sosMessage}
+            </p>
+          )}
+        </div>
       </div>
 
       {/* Stat cards */}

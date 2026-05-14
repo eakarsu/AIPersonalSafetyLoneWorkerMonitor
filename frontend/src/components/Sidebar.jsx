@@ -6,7 +6,8 @@ import {
   Clock, GraduationCap, Wrench,
   Brain, Search, Activity, Zap, Route, TrendingUp,
   Settings, Eye, BookOpen, FileText,
-  Shield, ChevronLeft, ChevronRight, LogOut, Sparkles
+  Shield, ChevronLeft, ChevronRight, LogOut, Sparkles,
+  Radio, TriangleAlert, History, MonitorCheck, AlertOctagon, ClipboardList, Megaphone
 } from 'lucide-react';
 
 const navSections = [
@@ -16,8 +17,27 @@ const navSections = [
       { label: 'Dashboard', icon: LayoutDashboard, path: '/' },
       { label: 'Workers', icon: Users, path: '/workers' },
       { label: 'Check-ins', icon: ClipboardCheck, path: '/checkins' },
+      { label: 'Check-In Dashboard', icon: MonitorCheck, path: '/checkin-dashboard' },
       { label: 'Locations', icon: MapPin, path: '/locations' },
-    ],
+      { label: 'Heartbeat Map', icon: Radio, path: '/heartbeat-map' },
+      { label: 'Geofences', icon: TriangleAlert, path: '/geofences' },
+  // === Batch 06 Gaps & Frontend Mounts ===
+  { path: '/cf-agentic-safety-orchestration', label: 'Agentic safety orchestration', icon: '✨' },
+  { path: '/cf-computer-vision-incident-detection', label: 'Computer vision incident detection', icon: '✨' },
+  { path: '/cf-behavioral-risk-profiling', label: 'Behavioral risk profiling', icon: '✨' },
+  { path: '/cf-environmental-hazard-sensing', label: 'Environmental hazard sensing', icon: '✨' },
+  { path: '/cf-peer-safety-networks', label: 'Peer safety networks', icon: '✨' },
+  { path: '/gap-equipment-without-equipment', label: 'Equipment without `/equipment', icon: '✨' },
+  { path: '/gap-compliance-without-audit', label: 'Compliance without `/audit', icon: '✨' },
+  { path: '/gap-shifts-without-burnout', label: 'Shifts without `/burnout', icon: '✨' },
+  { path: '/gap-no-wearable-device-integration-smartwatch-beacon', label: 'No wearable device integration (smartwatch, beacon)', icon: '✨' },
+  { path: '/gap-no-integration-with-emergency-services-911-auto', label: 'No integration with emergency services (911 auto', icon: '✨' },
+  { path: '/gap-no-real', label: 'No real', icon: '✨' },
+  { path: '/gap-limited-multi', label: 'Limited multi', icon: '✨' },
+  { path: '/gap-no-notifications-module-dedicated-route-relies-on-', label: 'No notifications module dedicated route (relies on SOS/emergency only)', icon: '✨' },
+  { path: '/gap-no-webhooks-for-external-dispatch-systems', label: 'No webhooks for external dispatch systems', icon: '✨' },
+  { path: '/gap-no-native-mobile-app-despite-field', label: 'No native mobile app despite field', icon: '✨' }
+],
   },
   {
     title: 'SAFETY',
@@ -50,6 +70,12 @@ const navSections = [
       { label: 'Hazard Prediction', icon: Eye, path: '/ai/hazard-prediction' },
       { label: 'Training Recommender', icon: BookOpen, path: '/ai/training-recommender' },
       { label: 'Safety Report', icon: FileText, path: '/ai/safety-report' },
+      { label: 'AI History', icon: History, path: '/ai/history' },
+      { label: 'Risk Assess Tool', icon: AlertOctagon, path: '/ai/risk-assess' },
+      { label: 'Emergency Display', icon: Zap, path: '/ai/emergency-display' },
+      { label: 'Safety Briefing', icon: Megaphone, path: '/ai/safety-briefing' },
+      { label: 'Incident Report Builder', icon: ClipboardList, path: '/ai/incident-report' },
+      { label: 'Predictive Tools', icon: Brain, path: '/ai/predictive' },
     ],
   },
 ];
