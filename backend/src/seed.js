@@ -15,6 +15,11 @@ async function seed() {
 
     // Drop tables in reverse dependency order
     await client.query(`
+      DROP TABLE IF EXISTS ai_results CASCADE;
+      DROP TABLE IF EXISTS emergency_events CASCADE;
+      DROP TABLE IF EXISTS escalation_chains CASCADE;
+      DROP TABLE IF EXISTS device_heartbeats CASCADE;
+      DROP TABLE IF EXISTS geofences CASCADE;
       DROP TABLE IF EXISTS equipment_inspections CASCADE;
       DROP TABLE IF EXISTS training_records CASCADE;
       DROP TABLE IF EXISTS hazards CASCADE;
@@ -54,6 +59,7 @@ async function seed() {
         risk_level VARCHAR(50) DEFAULT 'low',
         last_check_in TIMESTAMP,
         location VARCHAR(255),
+        check_in_interval_minutes INTEGER DEFAULT 60,
         created_at TIMESTAMP DEFAULT NOW()
       )
     `);
@@ -185,6 +191,69 @@ async function seed() {
         last_inspection TIMESTAMP,
         next_inspection TIMESTAMP,
         notes TEXT,
+        created_at TIMESTAMP DEFAULT NOW()
+      )
+    `);
+
+    // Create device_heartbeats table
+    await client.query(`
+      CREATE TABLE device_heartbeats (
+        id SERIAL PRIMARY KEY,
+        worker_id INTEGER REFERENCES workers(id) ON DELETE CASCADE,
+        lat DECIMAL(10, 7),
+        lng DECIMAL(10, 7),
+        battery_pct INTEGER,
+        recorded_at TIMESTAMP DEFAULT NOW()
+      )
+    `);
+
+    // Create escalation_chains table
+    await client.query(`
+      CREATE TABLE escalation_chains (
+        id SERIAL PRIMARY KEY,
+        worker_id INTEGER REFERENCES workers(id) ON DELETE CASCADE,
+        level INTEGER NOT NULL,
+        contact_name VARCHAR(100),
+        contact_phone VARCHAR(20),
+        contact_email VARCHAR(100),
+        created_at TIMESTAMP DEFAULT NOW()
+      )
+    `);
+
+    // Create geofences table
+    await client.query(`
+      CREATE TABLE geofences (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        zone_type VARCHAR(100),
+        boundary JSONB,
+        risk_level VARCHAR(50) DEFAULT 'medium',
+        created_at TIMESTAMP DEFAULT NOW()
+      )
+    `);
+
+    // Create emergency_events table (detailed emergency log)
+    await client.query(`
+      CREATE TABLE emergency_events (
+        id SERIAL PRIMARY KEY,
+        worker_id INTEGER REFERENCES workers(id) ON DELETE CASCADE,
+        emergency_id INTEGER REFERENCES emergencies(id) ON DELETE SET NULL,
+        location VARCHAR(255),
+        type VARCHAR(50) DEFAULT 'sos',
+        description TEXT,
+        response_plan TEXT,
+        timestamp TIMESTAMP DEFAULT NOW()
+      )
+    `);
+
+    // Create ai_results table
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS ai_results (
+        id SERIAL PRIMARY KEY,
+        user_id INTEGER,
+        endpoint VARCHAR(100),
+        result TEXT,
+        metadata JSONB,
         created_at TIMESTAMP DEFAULT NOW()
       )
     `);

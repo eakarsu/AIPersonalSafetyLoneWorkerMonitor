@@ -24,7 +24,33 @@ import AIShiftOptimizerPage from './pages/AIShiftOptimizerPage';
 import AIHazardPredictionPage from './pages/AIHazardPredictionPage';
 import AITrainingRecommenderPage from './pages/AITrainingRecommenderPage';
 import AISafetyReportPage from './pages/AISafetyReportPage';
+import HeartbeatMapPage from './pages/HeartbeatMapPage';
+import GeofencesPage from './pages/GeofencesPage';
+import AIHistoryPage from './pages/AIHistoryPage';
+import CheckInDashboardPage from './pages/CheckInDashboardPage';
+import RiskAssessToolPage from './pages/RiskAssessToolPage';
+import EmergencyResponseDisplayPage from './pages/EmergencyResponseDisplayPage';
+import SafetyBriefingPage from './pages/SafetyBriefingPage';
+import IncidentReportBuilderPage from './pages/IncidentReportBuilderPage';
+import AIPredictivePage from './pages/AIPredictivePage';
 
+// // === Batch 06 Gaps & Frontend Mounts ===
+import CFAgenticSafetyOrchestrationPage from './pages/CFAgenticSafetyOrchestrationPage';
+import CFComputerVisionIncidentDetectionPage from './pages/CFComputerVisionIncidentDetectionPage';
+import CFBehavioralRiskProfilingPage from './pages/CFBehavioralRiskProfilingPage';
+import CFEnvironmentalHazardSensingPage from './pages/CFEnvironmentalHazardSensingPage';
+import CFPeerSafetyNetworksPage from './pages/CFPeerSafetyNetworksPage';
+import GapEquipmentWithoutEquipmentPage from './pages/GapEquipmentWithoutEquipmentPage';
+import GapComplianceWithoutAuditPage from './pages/GapComplianceWithoutAuditPage';
+import GapShiftsWithoutBurnoutPage from './pages/GapShiftsWithoutBurnoutPage';
+import GapNoWearableDeviceIntegrationSmartwatchBeaconPage from './pages/GapNoWearableDeviceIntegrationSmartwatchBeaconPage';
+import GapNoIntegrationWithEmergencyServices911AutoPage from './pages/GapNoIntegrationWithEmergencyServices911AutoPage';
+import GapNoRealPage from './pages/GapNoRealPage';
+import GapLimitedMultiPage from './pages/GapLimitedMultiPage';
+import GapNoNotificationsModuleDedicatedRouteReliesOnPage from './pages/GapNoNotificationsModuleDedicatedRouteReliesOnPage';
+import GapNoWebhooksForExternalDispatchSystemsPage from './pages/GapNoWebhooksForExternalDispatchSystemsPage';
+import GapNoNativeMobileAppDespiteFieldPage from './pages/GapNoNativeMobileAppDespiteFieldPage';
+import CustomViewsPage from './pages/CustomViewsPage';
 export default function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -83,8 +109,35 @@ export default function App() {
         <Route path="/ai/hazard-prediction" element={<AIHazardPredictionPage />} />
         <Route path="/ai/training-recommender" element={<AITrainingRecommenderPage />} />
         <Route path="/ai/safety-report" element={<AISafetyReportPage />} />
+        <Route path="/ai/history" element={<AIHistoryPage />} />
+        <Route path="/heartbeat-map" element={<HeartbeatMapPage />} />
+        <Route path="/geofences" element={<GeofencesPage />} />
+        <Route path="/checkin-dashboard" element={<CheckInDashboardPage />} />
+        <Route path="/ai/risk-assess" element={<RiskAssessToolPage />} />
+        <Route path="/ai/emergency-display" element={<EmergencyResponseDisplayPage />} />
+        <Route path="/ai/safety-briefing" element={<SafetyBriefingPage />} />
+        <Route path="/ai/incident-report" element={<IncidentReportBuilderPage />} />
+        <Route path="/ai/predictive" element={<AIPredictivePage />} />
+        <Route path="/custom-views" element={<CustomViewsPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
+      
+          {/* // === Batch 06 Gaps & Frontend Mounts === */}
+          <Route path="/cf-agentic-safety-orchestration" element={<CFAgenticSafetyOrchestrationPage />} />
+          <Route path="/cf-computer-vision-incident-detection" element={<CFComputerVisionIncidentDetectionPage />} />
+          <Route path="/cf-behavioral-risk-profiling" element={<CFBehavioralRiskProfilingPage />} />
+          <Route path="/cf-environmental-hazard-sensing" element={<CFEnvironmentalHazardSensingPage />} />
+          <Route path="/cf-peer-safety-networks" element={<CFPeerSafetyNetworksPage />} />
+          <Route path="/gap-equipment-without-equipment" element={<GapEquipmentWithoutEquipmentPage />} />
+          <Route path="/gap-compliance-without-audit" element={<GapComplianceWithoutAuditPage />} />
+          <Route path="/gap-shifts-without-burnout" element={<GapShiftsWithoutBurnoutPage />} />
+          <Route path="/gap-no-wearable-device-integration-smartwatch-beacon" element={<GapNoWearableDeviceIntegrationSmartwatchBeaconPage />} />
+          <Route path="/gap-no-integration-with-emergency-services-911-auto" element={<GapNoIntegrationWithEmergencyServices911AutoPage />} />
+          <Route path="/gap-no-real" element={<GapNoRealPage />} />
+          <Route path="/gap-limited-multi" element={<GapLimitedMultiPage />} />
+          <Route path="/gap-no-notifications-module-dedicated-route-relies-on-" element={<GapNoNotificationsModuleDedicatedRouteReliesOnPage />} />
+          <Route path="/gap-no-webhooks-for-external-dispatch-systems" element={<GapNoWebhooksForExternalDispatchSystemsPage />} />
+          <Route path="/gap-no-native-mobile-app-despite-field" element={<GapNoNativeMobileAppDespiteFieldPage />} />
+        </Routes>
     </Layout>
   );
 }

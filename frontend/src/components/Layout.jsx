@@ -24,6 +24,9 @@ const pageTitles = {
   '/ai/hazard-prediction': 'AI Hazard Prediction',
   '/ai/training-recommender': 'AI Training Recommender',
   '/ai/safety-report': 'AI Safety Report',
+  '/ai/history': 'AI History',
+  '/heartbeat-map': 'Heartbeat Map',
+  '/geofences': 'Geofences',
 };
 
 const getBreadcrumbs = (pathname) => {
