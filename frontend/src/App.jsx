@@ -50,6 +50,7 @@ import GapLimitedMultiPage from './pages/GapLimitedMultiPage';
 import GapNoNotificationsModuleDedicatedRouteReliesOnPage from './pages/GapNoNotificationsModuleDedicatedRouteReliesOnPage';
 import GapNoWebhooksForExternalDispatchSystemsPage from './pages/GapNoWebhooksForExternalDispatchSystemsPage';
 import GapNoNativeMobileAppDespiteFieldPage from './pages/GapNoNativeMobileAppDespiteFieldPage';
+import CustomViewsPage from './pages/CustomViewsPage';
 export default function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -117,6 +118,7 @@ export default function App() {
         <Route path="/ai/safety-briefing" element={<SafetyBriefingPage />} />
         <Route path="/ai/incident-report" element={<IncidentReportBuilderPage />} />
         <Route path="/ai/predictive" element={<AIPredictivePage />} />
+        <Route path="/custom-views" element={<CustomViewsPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       
           {/* // === Batch 06 Gaps & Frontend Mounts === */}

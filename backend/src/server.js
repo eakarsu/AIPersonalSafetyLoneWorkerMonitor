@@ -24,6 +24,7 @@ import heartbeatRoutes from './routes/heartbeat.js';
 import sosRoutes from './routes/sos.js';
 import geofenceRoutes from './routes/geofences.js';
 import extensionsRoutes from './routes/extensions.js';
+import customViewsRoutes from './routes/customViews.js';
 
 const app = express();
 const PORT = process.env.BACKEND_PORT || 3001;
@@ -58,6 +59,7 @@ app.use('/api', sosRoutes);
 app.use('/api/geofences', geofenceRoutes);
 // Apply pass 5 — backlog extensions (wearable, dispatch, biometric, i18n, bodycam, IoT)
 app.use('/api/extensions', extensionsRoutes);
+app.use('/api/custom-views', customViewsRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {
@@ -151,14 +153,14 @@ import('./routes/customFeat04_EnvironmentalHazardSensing.js').then(m => app.use(
 import('./routes/customFeat05_PeerSafetyNetworks.js').then(m => app.use('/api/cf-peer-safety-networks', m.default));
 
 
-// === Batch 06 Gaps & Frontend Mounts ===
-app.use('/api/gap-equipment-without-equipment', require('./routes/gapFeat_equipment_without_equipment'));
-app.use('/api/gap-compliance-without-audit', require('./routes/gapFeat_compliance_without_audit'));
-app.use('/api/gap-shifts-without-burnout', require('./routes/gapFeat_shifts_without_burnout'));
-app.use('/api/gap-no-wearable-device-integration-smartwatch-beacon', require('./routes/gapFeat_no_wearable_device_integration_smartwatch_beacon'));
-app.use('/api/gap-no-integration-with-emergency-services-911-auto', require('./routes/gapFeat_no_integration_with_emergency_services_911_auto'));
-app.use('/api/gap-no-real', require('./routes/gapFeat_no_real'));
-app.use('/api/gap-limited-multi', require('./routes/gapFeat_limited_multi'));
-app.use('/api/gap-no-notifications-module-dedicated-route-relies-on-', require('./routes/gapFeat_no_notifications_module_dedicated_route_relies_on_'));
-app.use('/api/gap-no-webhooks-for-external-dispatch-systems', require('./routes/gapFeat_no_webhooks_for_external_dispatch_systems'));
-app.use('/api/gap-no-native-mobile-app-despite-field', require('./routes/gapFeat_no_native_mobile_app_despite_field'));
+// === Batch 06 Gaps & Frontend Mounts (converted to dynamic ESM imports) ===
+import('./routes/gapFeat_equipment_without_equipment.js').then(m => app.use('/api/gap-equipment-without-equipment', m.default)).catch(e => console.error('gap mount error:', e.message));
+import('./routes/gapFeat_compliance_without_audit.js').then(m => app.use('/api/gap-compliance-without-audit', m.default)).catch(e => console.error('gap mount error:', e.message));
+import('./routes/gapFeat_shifts_without_burnout.js').then(m => app.use('/api/gap-shifts-without-burnout', m.default)).catch(e => console.error('gap mount error:', e.message));
+import('./routes/gapFeat_no_wearable_device_integration_smartwatch_beacon.js').then(m => app.use('/api/gap-no-wearable-device-integration-smartwatch-beacon', m.default)).catch(e => console.error('gap mount error:', e.message));
+import('./routes/gapFeat_no_integration_with_emergency_services_911_auto.js').then(m => app.use('/api/gap-no-integration-with-emergency-services-911-auto', m.default)).catch(e => console.error('gap mount error:', e.message));
+import('./routes/gapFeat_no_real.js').then(m => app.use('/api/gap-no-real', m.default)).catch(e => console.error('gap mount error:', e.message));
+import('./routes/gapFeat_limited_multi.js').then(m => app.use('/api/gap-limited-multi', m.default)).catch(e => console.error('gap mount error:', e.message));
+import('./routes/gapFeat_no_notifications_module_dedicated_route_relies_on_.js').then(m => app.use('/api/gap-no-notifications-module-dedicated-route-relies-on-', m.default)).catch(e => console.error('gap mount error:', e.message));
+import('./routes/gapFeat_no_webhooks_for_external_dispatch_systems.js').then(m => app.use('/api/gap-no-webhooks-for-external-dispatch-systems', m.default)).catch(e => console.error('gap mount error:', e.message));
+import('./routes/gapFeat_no_native_mobile_app_despite_field.js').then(m => app.use('/api/gap-no-native-mobile-app-despite-field', m.default)).catch(e => console.error('gap mount error:', e.message));

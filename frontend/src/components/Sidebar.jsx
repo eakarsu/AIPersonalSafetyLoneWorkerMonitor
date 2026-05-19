@@ -7,7 +7,7 @@ import {
   Brain, Search, Activity, Zap, Route, TrendingUp,
   Settings, Eye, BookOpen, FileText,
   Shield, ChevronLeft, ChevronRight, LogOut, Sparkles,
-  Radio, TriangleAlert, History, MonitorCheck, AlertOctagon, ClipboardList, Megaphone
+  Radio, AlertTriangle as TriangleAlert, History, MonitorCheck, AlertOctagon, ClipboardList, Megaphone
 } from 'lucide-react';
 
 const navSections = [
@@ -21,6 +21,7 @@ const navSections = [
       { label: 'Locations', icon: MapPin, path: '/locations' },
       { label: 'Heartbeat Map', icon: Radio, path: '/heartbeat-map' },
       { label: 'Geofences', icon: TriangleAlert, path: '/geofences' },
+      { label: 'Safety Views', icon: Eye, path: '/custom-views' },
   // === Batch 06 Gaps & Frontend Mounts ===
   { path: '/cf-agentic-safety-orchestration', label: 'Agentic safety orchestration', icon: '✨' },
   { path: '/cf-computer-vision-incident-detection', label: 'Computer vision incident detection', icon: '✨' },
@@ -152,6 +153,7 @@ export default function Sidebar({ onLogout }) {
             <ul className="space-y-0.5">
               {section.items.map((item) => {
                 const Icon = item.icon;
+                const isStringIcon = typeof Icon !== 'function';
                 const active = isActive(item.path);
                 return (
                   <li key={item.path}>
@@ -166,16 +168,20 @@ export default function Sidebar({ onLogout }) {
                           : 'text-gray-400 hover:text-white hover:bg-white/5'
                       } ${collapsed ? 'justify-center' : ''}`}
                     >
-                      <Icon
-                        size={18}
-                        className={
-                          active
-                            ? section.isAI
-                              ? 'text-purple-400'
-                              : 'text-primary-400'
-                            : ''
-                        }
-                      />
+                      {isStringIcon ? (
+                        <span style={{ fontSize: 16, lineHeight: 1 }}>{String(Icon)}</span>
+                      ) : (
+                        <Icon
+                          size={18}
+                          className={
+                            active
+                              ? section.isAI
+                                ? 'text-purple-400'
+                                : 'text-primary-400'
+                              : ''
+                          }
+                        />
+                      )}
                       {!collapsed && <span className="truncate">{item.label}</span>}
                       {active && !collapsed && (
                         <div
