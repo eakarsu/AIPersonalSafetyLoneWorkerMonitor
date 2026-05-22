@@ -54,12 +54,19 @@ else
     fi
 fi
 
-# Step 2: Clean ports 3000 and 3001
-print_blue "Cleaning ports 3000 and 3001..."
-lsof -ti:3000 | xargs kill -9 2>/dev/null
-lsof -ti:3001 | xargs kill -9 2>/dev/null
+# Load ports from .env if present
+if [ -f "$PROJECT_DIR/.env" ]; then
+    set -a; . "$PROJECT_DIR/.env"; set +a
+fi
+BACKEND_PORT="${BACKEND_PORT:-3001}"
+FRONTEND_PORT="${FRONTEND_PORT:-3000}"
+
+# Step 2: Clean ports
+print_blue "Cleaning ports $FRONTEND_PORT and $BACKEND_PORT..."
+lsof -ti:$FRONTEND_PORT | xargs kill -9 2>/dev/null
+lsof -ti:$BACKEND_PORT | xargs kill -9 2>/dev/null
 sleep 1
-print_green "Ports 3000 and 3001 are free"
+print_green "Ports $FRONTEND_PORT and $BACKEND_PORT are free"
 
 # Step 3: Create database
 print_blue "Ensuring database exists..."
@@ -101,15 +108,15 @@ cd "$PROJECT_DIR/backend" && npx nodemon src/server.js &
 BACKEND_PID=$!
 
 # Step 8: Start frontend with vite dev server (HMR)
-print_blue "Starting frontend dev server with HMR (vite)..."
-cd "$PROJECT_DIR/frontend" && npx vite --port 3000 &
+print_blue "Starting frontend dev server with HMR (vite) on port $FRONTEND_PORT..."
+cd "$PROJECT_DIR/frontend" && BACKEND_URL="http://127.0.0.1:$BACKEND_PORT" FRONTEND_PORT="$FRONTEND_PORT" npx vite --port $FRONTEND_PORT &
 FRONTEND_PID=$!
 
 # Step 9: Wait for servers to be ready
 print_blue "Waiting for servers to start..."
 RETRIES=0
 MAX_RETRIES=30
-while ! curl -s http://localhost:3001 >/dev/null 2>&1; do
+while ! curl -s http://localhost:$BACKEND_PORT >/dev/null 2>&1; do
     RETRIES=$((RETRIES + 1))
     if [ $RETRIES -ge $MAX_RETRIES ]; then
         print_yellow "Backend may still be starting up..."
@@ -119,7 +126,7 @@ while ! curl -s http://localhost:3001 >/dev/null 2>&1; do
 done
 
 RETRIES=0
-while ! curl -s http://localhost:3000 >/dev/null 2>&1; do
+while ! curl -s http://localhost:$FRONTEND_PORT >/dev/null 2>&1; do
     RETRIES=$((RETRIES + 1))
     if [ $RETRIES -ge $MAX_RETRIES ]; then
         print_yellow "Frontend may still be starting up..."

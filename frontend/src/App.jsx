@@ -51,6 +51,9 @@ import GapNoNotificationsModuleDedicatedRouteReliesOnPage from './pages/GapNoNot
 import GapNoWebhooksForExternalDispatchSystemsPage from './pages/GapNoWebhooksForExternalDispatchSystemsPage';
 import GapNoNativeMobileAppDespiteFieldPage from './pages/GapNoNativeMobileAppDespiteFieldPage';
 import CustomViewsPage from './pages/CustomViewsPage';
+import CodexCustomVizFeature from './pages/CodexCustomVizFeature';
+import CodexOperationsFeature from './pages/CodexOperationsFeature';
+
 export default function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -88,6 +91,9 @@ export default function App() {
   return (
     <Layout user={user} onLogout={handleLogout}>
       <Routes>
+        <Route path="/codex/custom-viz" element={<CodexCustomVizFeature />} />
+        <Route path="/codex/operations" element={<CodexOperationsFeature />} />
+
         <Route path="/" element={<DashboardPage />} />
         <Route path="/workers" element={<WorkersPage />} />
         <Route path="/incidents" element={<IncidentsPage />} />
