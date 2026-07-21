@@ -25,6 +25,8 @@ import sosRoutes from './routes/sos.js';
 import geofenceRoutes from './routes/geofences.js';
 import extensionsRoutes from './routes/extensions.js';
 import customViewsRoutes from './routes/customViews.js';
+import authMiddleware from './middleware/auth.js';
+import safetyWorkflowRoutes from './routes/safetyWorkflow.js';
 
 const app = express();
 const PORT = process.env.BACKEND_PORT || 3001;
@@ -60,6 +62,8 @@ app.use('/api/geofences', geofenceRoutes);
 // Apply pass 5 — backlog extensions (wearable, dispatch, biometric, i18n, bodycam, IoT)
 app.use('/api/extensions', extensionsRoutes);
 app.use('/api/custom-views', customViewsRoutes);
+app.use('/api/safety-workflows', authMiddleware, safetyWorkflowRoutes);
+app.use(/^\/api\/(?:cf-|gap-)/, authMiddleware, (req, res) => res.status(503).json({ success: false, error: 'Generated feature route is quarantined pending validated implementation' }));
 
 // Health check
 app.get('/api/health', (req, res) => {
@@ -135,11 +139,7 @@ pool.query('SELECT NOW()')
   })
   .catch((err) => {
     console.error('Database connection failed:', err.message);
-    console.log('Starting server without database connection...');
-    httpServer.listen(PORT, () => {
-      console.log(`HTTP Server running on port ${PORT} (database not connected)`);
-      console.log(`WebSocket server running on port ${WS_PORT}`);
-    });
+    process.exit(1);
   });
 
 export default app;

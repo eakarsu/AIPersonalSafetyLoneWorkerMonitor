@@ -1,12 +1,13 @@
 import pg from 'pg';
 import dotenv from 'dotenv';
+import { databaseUrl } from './config/security.js';
 
 dotenv.config({ path: new URL('../../.env', import.meta.url).pathname });
 
 const { Pool } = pg;
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: databaseUrl(),
 });
 
 pool.on('error', (err) => {

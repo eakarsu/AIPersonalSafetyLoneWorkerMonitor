@@ -1,9 +1,10 @@
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import { jwtSecret } from '../config/security.js';
 
 dotenv.config({ path: new URL('../../../.env', import.meta.url).pathname });
 
-const JWT_SECRET = process.env.JWT_SECRET || 'fallback_secret_key';
+const JWT_SECRET = jwtSecret();
 
 export function generateToken(user) {
   return jwt.sign(

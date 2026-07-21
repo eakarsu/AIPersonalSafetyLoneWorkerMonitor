@@ -1,13 +1,18 @@
 import pg from 'pg';
 import bcrypt from 'bcryptjs';
 import dotenv from 'dotenv';
+import { databaseUrl } from './config/security.js';
 
 dotenv.config({ path: new URL('../../.env', import.meta.url).pathname });
 
 const { Pool } = pg;
-const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+const pool = new Pool({ connectionString: databaseUrl() });
 
 async function seed() {
+  if (process.env.ALLOW_DESTRUCTIVE_SEED !== 'true') throw new Error('set ALLOW_DESTRUCTIVE_SEED=true to run the destructive demo seed explicitly');
+  const seedAdminEmail = process.env.SEED_ADMIN_EMAIL;
+  const seedAdminPassword = process.env.SEED_ADMIN_PASSWORD;
+  if (!seedAdminEmail || !seedAdminPassword) throw new Error('SEED_ADMIN_EMAIL and SEED_ADMIN_PASSWORD are required');
   const client = await pool.connect();
 
   try {
@@ -261,10 +266,10 @@ async function seed() {
     console.log('All tables created');
 
     // Seed default admin user
-    const hashedPassword = await bcrypt.hash('admin123', 10);
+    const hashedPassword = await bcrypt.hash(seedAdminPassword, 10);
     await client.query(
       `INSERT INTO users (name, email, password, role) VALUES ($1, $2, $3, $4)`,
-      ['Admin User', 'admin@safeguard.com', hashedPassword, 'admin']
+      ['Admin User', seedAdminEmail, hashedPassword, 'admin']
     );
     console.log('Default admin user created');
 
@@ -479,7 +484,7 @@ async function seed() {
     console.log('Equipment inspections seeded');
 
     console.log('\nDatabase seed completed successfully!');
-    console.log('Default login: admin@safeguard.com / admin123');
+    console.log(`Configured admin created for ${seedAdminEmail}`);
   } catch (error) {
     console.error('Seed error:', error);
     throw error;

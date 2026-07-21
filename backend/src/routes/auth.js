@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import bcrypt from 'bcryptjs';
 import pool from '../db.js';
-import { generateToken } from '../middleware/auth.js';
+import { authMiddleware, generateToken } from '../middleware/auth.js';
 
 const router = Router();
 
@@ -49,7 +49,7 @@ router.post('/login', async (req, res) => {
 // POST /api/auth/register
 router.post('/register', async (req, res) => {
   try {
-    const { name, email, password, role } = req.body;
+    const { name, email, password } = req.body;
 
     if (!name || !email || !password) {
       return res.status(400).json({ success: false, error: 'Name, email, and password are required' });
@@ -64,7 +64,7 @@ router.post('/register', async (req, res) => {
 
     const result = await pool.query(
       'INSERT INTO users (name, email, password, role) VALUES ($1, $2, $3, $4) RETURNING id, name, email, role, created_at',
-      [name, email, hashedPassword, role || 'user']
+      [name, email, hashedPassword, 'worker']
     );
 
     const user = result.rows[0];
@@ -81,6 +81,10 @@ router.post('/register', async (req, res) => {
     console.error('Register error:', error);
     res.status(500).json({ success: false, error: 'Internal server error' });
   }
+});
+
+router.get('/me', authMiddleware, (req, res) => {
+  res.json({ success: true, data: { user: req.user } });
 });
 
 export default router;
