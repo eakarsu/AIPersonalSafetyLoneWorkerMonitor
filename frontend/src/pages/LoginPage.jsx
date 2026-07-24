@@ -25,8 +25,8 @@ export default function LoginPage({ onLogin }) {
   };
 
   const handleQuickLogin = () => {
-    setEmail('admin@safeguard.com');
-    setPassword('admin123');
+    setEmail(import.meta.env.VITE_DEMO_EMAIL || '');
+    setPassword(import.meta.env.VITE_DEMO_PASSWORD || '');
     setError('');
   };
 
