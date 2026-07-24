@@ -18,11 +18,10 @@ if (( ${#JWT_SECRET} < 32 )); then
   echo 'JWT_SECRET must contain at least 32 characters.' >&2
   exit 1
 fi
-BACKEND_PORT=${BACKEND_PORT:-3001}
-FRONTEND_PORT=${FRONTEND_PORT:-3000}
-export BACKEND_PORT
-WS_PORT=${WS_PORT:-3002}
-export WS_PORT
+: "${BACKEND_PORT:?BACKEND_PORT is required}"
+: "${FRONTEND_PORT:?FRONTEND_PORT is required}"
+[[ "${ALLOW_SCHEMA_MIGRATION:-}" == "true" ]] || { echo 'ALLOW_SCHEMA_MIGRATION=true is required.' >&2; exit 1; }
+export BACKEND_PORT FRONTEND_PORT
 
 for dependency_dir in backend/node_modules frontend/node_modules; do
   if [[ ! -d "$dependency_dir" ]]; then
@@ -40,7 +39,8 @@ check_port() {
 }
 check_port "$BACKEND_PORT"
 check_port "$FRONTEND_PORT"
-check_port "$WS_PORT"
+
+(cd backend && node scripts/prepareRuntime.js)
 
 BACKEND_PID=
 FRONTEND_PID=
@@ -55,9 +55,9 @@ cleanup() {
 }
 trap cleanup EXIT INT TERM
 
-(cd backend && npm run dev) &
+(cd backend && node src/server.js) &
 BACKEND_PID=$!
-(cd frontend && npm run dev) &
+(cd frontend && npm run dev -- --host 127.0.0.1 --port "$FRONTEND_PORT" --strictPort) &
 FRONTEND_PID=$!
 
 while kill -0 "$BACKEND_PID" 2>/dev/null && kill -0 "$FRONTEND_PID" 2>/dev/null; do

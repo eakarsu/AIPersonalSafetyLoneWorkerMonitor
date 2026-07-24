@@ -30,7 +30,6 @@ import safetyWorkflowRoutes from './routes/safetyWorkflow.js';
 
 const app = express();
 const PORT = process.env.BACKEND_PORT || 3001;
-const WS_PORT = process.env.WS_PORT || 3002;
 
 // Security
 app.use(helmet());
@@ -72,7 +71,7 @@ app.get('/api/health', (req, res) => {
 
 // WebSocket server for real-time check-in broadcasts
 const httpServer = http.createServer(app);
-const wss = new WebSocketServer({ port: WS_PORT });
+const wss = new WebSocketServer({ server: httpServer });
 
 const wsClients = new Set();
 
@@ -134,7 +133,7 @@ pool.query('SELECT NOW()')
     console.log('Database connected successfully');
     httpServer.listen(PORT, () => {
       console.log(`HTTP Server running on port ${PORT}`);
-      console.log(`WebSocket server running on port ${WS_PORT}`);
+      console.log(`WebSocket server shares HTTP port ${PORT}`);
     });
   })
   .catch((err) => {

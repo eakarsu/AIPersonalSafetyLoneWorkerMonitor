@@ -83,8 +83,14 @@ router.post('/register', async (req, res) => {
   }
 });
 
-router.get('/me', authMiddleware, (req, res) => {
-  res.json({ success: true, data: { user: req.user } });
+router.get('/me', authMiddleware, async (req, res) => {
+  try {
+    const result = await pool.query('SELECT id, name, email, role FROM users WHERE id = $1 LIMIT 1', [req.user.id]);
+    if (!result.rows.length) return res.status(401).json({ success: false, error: 'Session user no longer exists' });
+    res.json({ success: true, data: { user: result.rows[0] } });
+  } catch (error) {
+    res.status(500).json({ success: false, error: 'Unable to verify persisted session' });
+  }
 });
 
 export default router;
