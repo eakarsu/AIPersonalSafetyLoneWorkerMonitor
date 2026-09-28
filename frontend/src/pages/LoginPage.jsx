@@ -136,7 +136,7 @@ export default function LoginPage({ onLogin }) {
               className="w-full flex items-center justify-center gap-2 py-2.5 px-4 bg-white/5 hover:bg-white/10 border border-white/10 text-blue-200 font-medium rounded-lg transition"
             >
               <Zap className="w-4 h-4 text-yellow-400" />
-              Quick Login
+              Auto Fill Demo Credentials
             </button>
           </form>
         </div>
