@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { History, ChevronLeft, ChevronRight, Brain } from 'lucide-react';
-import api from '../services/api';
+import api, { responseRows } from '../services/api';
+import AIReport from '../components/AIReport';
 
 function formatTime(dateStr) {
   if (!dateStr) return '-';
@@ -31,7 +32,7 @@ export default function AIHistoryPage() {
     setLoading(true);
     try {
       const res = await api.get(`/ai/history?page=${p}&limit=15`);
-      setHistory(res.data.data || []);
+      setHistory(responseRows(res.data));
       setPagination(res.data.pagination || { totalPages: 1, total: 0 });
     } catch (err) {
       console.error(err);
@@ -98,15 +99,13 @@ export default function AIHistoryPage() {
                 <h2 className="text-sm font-semibold text-gray-700">{ENDPOINT_LABELS[selected.endpoint] || selected.endpoint}</h2>
                 <span className="text-xs text-gray-400 ml-auto">{formatTime(selected.created_at)}</span>
               </div>
-              <div className="prose prose-sm max-w-none">
-                <pre className="whitespace-pre-wrap text-xs text-gray-700 bg-gray-50 rounded-lg p-4 overflow-auto max-h-[600px] font-mono leading-relaxed">
-                  {selected.result}
-                </pre>
-              </div>
+              <AIReport response={selected.result} title={ENDPOINT_LABELS[selected.endpoint] || selected.endpoint} />
               {selected.metadata && (
                 <div className="mt-3 p-3 bg-purple-50 rounded-lg">
-                  <p className="text-xs font-medium text-purple-700 mb-1">Metadata</p>
-                  <pre className="text-xs text-purple-600">{JSON.stringify(typeof selected.metadata === 'string' ? JSON.parse(selected.metadata) : selected.metadata, null, 2)}</pre>
+                  <details>
+                    <summary className="text-xs font-medium text-purple-700">Run details</summary>
+                    <AIReport response={{ details: selected.metadata }} title="Run details" />
+                  </details>
                 </div>
               )}
             </>

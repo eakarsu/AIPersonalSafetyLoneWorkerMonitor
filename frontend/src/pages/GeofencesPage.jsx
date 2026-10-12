@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { MapPin, Plus, Trash2, Edit, CheckCircle, XCircle } from 'lucide-react';
-import api from '../services/api';
+import api, { responseRows } from '../services/api';
 
 const emptyForm = { name: '', zone_type: 'restricted', risk_level: 'medium', boundary_min_lat: '', boundary_max_lat: '', boundary_min_lng: '', boundary_max_lng: '' };
 
@@ -17,7 +17,7 @@ export default function GeofencesPage() {
   const fetchGeofences = async () => {
     try {
       const res = await api.get('/geofences');
-      setGeofences(res.data.data || res.data || []);
+      setGeofences(responseRows(res.data));
     } catch (err) {
       console.error(err);
     } finally {

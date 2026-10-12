@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import api from '../services/api';
+import api, { responseRows } from '../services/api';
 
 export default function SOSBroadcast() {
   const [workers, setWorkers] = useState([]);
@@ -13,7 +13,7 @@ export default function SOSBroadcast() {
   async function loadWorkers() {
     try {
       const r = await api.get('/custom-views/worker-locations');
-      const list = r.data?.data || [];
+      const list = responseRows(r.data);
       setWorkers(list);
       if (list.length && !selectedWorker) {
         setSelectedWorker(String(list[0].id));
@@ -26,7 +26,7 @@ export default function SOSBroadcast() {
   async function loadLog() {
     try {
       const r = await api.get('/custom-views/sos-log');
-      setBroadcastLog(r.data?.data || []);
+      setBroadcastLog(responseRows(r.data));
     } catch (e) {
       // non-fatal
     }

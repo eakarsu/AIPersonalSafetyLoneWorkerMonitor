@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Shield, Mail, Lock, LogIn, Zap, AlertCircle, Loader2 } from 'lucide-react';
 
 export default function LoginPage({ onLogin }) {
+  const demoAvailable = import.meta.env.VITE_ENABLE_DEMO_CREDENTIAL_AUTOFILL === 'true'
+    && Boolean(import.meta.env.VITE_DEMO_EMAIL && import.meta.env.VITE_DEMO_PASSWORD);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -25,6 +27,7 @@ export default function LoginPage({ onLogin }) {
   };
 
   const handleQuickLogin = () => {
+    if (!demoAvailable) return;
     setEmail(import.meta.env.VITE_DEMO_EMAIL || '');
     setPassword(import.meta.env.VITE_DEMO_PASSWORD || '');
     setError('');
@@ -133,11 +136,13 @@ export default function LoginPage({ onLogin }) {
             <button
               type="button"
               onClick={handleQuickLogin}
+              disabled={!demoAvailable || loading}
               className="w-full flex items-center justify-center gap-2 py-2.5 px-4 bg-white/5 hover:bg-white/10 border border-white/10 text-blue-200 font-medium rounded-lg transition"
             >
               <Zap className="w-4 h-4 text-yellow-400" />
-              Auto Fill Demo Credentials
+              Fill demo credentials
             </button>
+            {!demoAvailable && <p className="text-xs text-blue-200/70">Demo credentials are not configured for this session. Sign in with your account credentials.</p>}
           </form>
         </div>
 

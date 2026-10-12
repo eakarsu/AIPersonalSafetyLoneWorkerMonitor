@@ -1,3 +1,4 @@
+import AIReportLibrary from "./AIReportLibrary";
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
@@ -213,6 +214,6 @@ export default function Sidebar({ onLogout }) {
           {!collapsed && <span>Logout</span>}
         </button>
       </div>
-    </aside>
+    <AIReportLibrary /></aside>
   );
 }

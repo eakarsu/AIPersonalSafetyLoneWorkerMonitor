@@ -1,3 +1,8 @@
+import { authMiddleware as aiWorkspaceDependency1 } from "./middleware/auth.js";
+import aiWorkspaceDependency2 from "./db.js";
+import aiWorkspaceDependency3 from "../aiWorkspaceAdapters.cjs";
+import aiWorkspaceDependency4 from "../aiWorkspace.cjs";
+import { readFileSync as readAIWorkspaceFile } from 'node:fs';
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
@@ -32,7 +37,7 @@ const app = express();
 const PORT = process.env.BACKEND_PORT || 3001;
 
 // Security
-app.use(helmet());
+app.use(helmet({ contentSecurityPolicy: { directives: { scriptSrcAttr: ["'unsafe-inline'"] } } }));
 
 // CORS
 app.use(cors({
@@ -62,6 +67,15 @@ app.use('/api/geofences', geofenceRoutes);
 app.use('/api/extensions', extensionsRoutes);
 app.use('/api/custom-views', customViewsRoutes);
 app.use('/api/safety-workflows', authMiddleware, safetyWorkflowRoutes);
+
+// Advisory AI reports only; native execution and approval routes stay unchanged.
+const aiWorkspaceSupport = aiWorkspaceDependency3;
+const aiWorkspaceFeatures = JSON.parse(readAIWorkspaceFile(new URL("../aiWorkspaceFeatures.json", import.meta.url), 'utf8'));
+const aiWorkspaceDatabase = aiWorkspaceDependency2;
+app.use('/api/report-workspace', aiWorkspaceDependency4.createAIWorkspaceRouter({
+  pool: aiWorkspaceDatabase, authenticateToken: aiWorkspaceDependency1,
+  aiRateLimiter: aiWorkspaceSupport.createWorkspaceLimiter(), features: aiWorkspaceFeatures,
+}));
 app.use(/^\/api\/(?:cf-|gap-)/, authMiddleware, (req, res) => res.status(503).json({ success: false, error: 'Generated feature route is quarantined pending validated implementation' }));
 
 // Health check

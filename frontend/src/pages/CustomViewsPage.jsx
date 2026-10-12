@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import 'leaflet/dist/leaflet.css';
-import api from '../services/api';
+import api, { responseRows } from '../services/api';
 import WorkerMap from '../components/WorkerMap';
 import CheckInTimeline from '../components/CheckInTimeline';
 import SOSBroadcast from '../components/SOSBroadcast.js';
@@ -23,8 +23,8 @@ export default function CustomViewsPage() {
           api.get('/custom-views/checkin-timeline'),
         ]);
         if (cancelled) return;
-        setWorkers(locRes.data?.data || []);
-        setTimeline(tlRes.data?.data || []);
+        setWorkers(responseRows(locRes.data));
+        setTimeline(responseRows(tlRes.data));
       } catch (e) {
         if (!cancelled) setError(e.message || String(e));
       } finally {

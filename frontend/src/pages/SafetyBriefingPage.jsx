@@ -1,7 +1,12 @@
+
+import FullAIExamples, { useFullAIExamples } from "../components/FullAIExamples.jsx";
 import { useState } from 'react';
 import api from '../services/api';
+import AIReport from '../components/AIReport';
 
 export default function SafetyBriefingPage() {
+  const fullAIExamples = useFullAIExamples();
+
   const [form, setForm] = useState({
     job_type: '',
     location_hazards: '',
@@ -38,7 +43,7 @@ export default function SafetyBriefingPage() {
       </div>
 
       <div className="bg-white rounded-xl border border-gray-200 p-6">
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4" data-full-ai-workspace="SafetyBriefingPage"><FullAIExamples controller={fullAIExamples} disabled={Boolean(loading)} />
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Job Type *</label>
             <input
@@ -48,7 +53,7 @@ export default function SafetyBriefingPage() {
               onChange={handleChange}
               placeholder="e.g., Electrical panel maintenance, Pipeline inspection, Confined space entry"
               required
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" data-full-ai-field={fullAIExamples.bind({ current: form.job_type, change: handleChange, label: "form.job_type", manual: false, json: false, sample: '' }, "p1-1477", undefined)}
             />
           </div>
           <div>
@@ -59,7 +64,7 @@ export default function SafetyBriefingPage() {
               onChange={handleChange}
               placeholder="e.g., High voltage equipment nearby, chemical storage, uneven terrain, poor lighting"
               rows={2}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" data-full-ai-field={fullAIExamples.bind({ current: form.location_hazards, change: handleChange, label: "form.location_hazards", manual: false, json: false, sample: '' }, "p1-2033", undefined)}
             />
           </div>
           <div>
@@ -70,7 +75,7 @@ export default function SafetyBriefingPage() {
               value={form.weather_conditions}
               onChange={handleChange}
               placeholder="e.g., Clear and sunny 22°C, Heavy rain expected, High winds 40km/h"
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" data-full-ai-field={fullAIExamples.bind({ current: form.weather_conditions, change: handleChange, label: "form.weather_conditions", manual: false, json: false, sample: '' }, "p1-2591", undefined)}
             />
           </div>
           <button
@@ -208,10 +213,11 @@ export default function SafetyBriefingPage() {
               </div>
             </div>
           )}
+          <AIReport response={briefing} title="Complete safety briefing" />
         </div>
       ) : result && (
         <div className="bg-white rounded-xl border border-gray-200 p-5">
-          <pre className="whitespace-pre-wrap text-sm text-gray-700">{result.raw}</pre>
+          <AIReport response={result.raw} title="Safety briefing" />
         </div>
       )}
     </div>

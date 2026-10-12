@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import api from '../services/api';
+import api, { responseRows } from '../services/api';
 import DataTable from '../components/DataTable';
 import DetailPanel from '../components/DetailPanel';
 import Modal from '../components/Modal';
@@ -33,7 +33,7 @@ export default function CheckinsPage() {
     setLoading(true);
     try {
       const res = await api.get('/api/checkins');
-      setCheckins(res.data);
+      setCheckins(responseRows(res.data));
     } catch (err) {
       console.error('Failed to fetch check-ins:', err);
     } finally {

@@ -35,17 +35,7 @@ router.get('/worker-locations', async (req, res) => {
       );
       workers = result.rows;
     } catch (dbErr) {
-      // Schema missing — synthesize a small set
-      workers = Array.from({ length: 12 }).map((_, i) => ({
-        id: i + 1,
-        name: `Worker ${i + 1}`,
-        department: ['Field Ops', 'Maintenance', 'Inspection'][i % 3],
-        role: 'Lone Worker',
-        status: ['active', 'active', 'emergency', 'offline'][i % 4],
-        location: 'Site',
-        last_check_in: new Date(Date.now() - (i * 12) * 60000).toISOString(),
-        check_in_interval_minutes: 60,
-      }));
+      throw dbErr;
     }
 
     // Synthesize coordinates if not stored — distribute around a central anchor (London)
@@ -86,22 +76,7 @@ router.get('/checkin-timeline', async (req, res) => {
       `);
       rows = result.rows;
     } catch (dbErr) {
-      // Synthesize check-ins if schema missing
-      const workerNames = ['Alice', 'Bob', 'Carla', 'Dan', 'Eve', 'Frank'];
-      const now = Date.now();
-      rows = [];
-      workerNames.forEach((name, wi) => {
-        for (let i = 0; i < 6; i++) {
-          rows.push({
-            id: wi * 100 + i,
-            worker_id: wi + 1,
-            worker_name: name,
-            status: ['safe', 'safe', 'help_needed', 'no_response'][i % 4],
-            location: 'Site',
-            checked_in_at: new Date(now - (i * 45 + wi * 10) * 60000).toISOString(),
-          });
-        }
-      });
+      throw dbErr;
     }
 
     // Group by worker for horizontal timeline rendering
@@ -128,7 +103,12 @@ router.get('/checkin-timeline', async (req, res) => {
       });
     }
 
-    const series = Array.from(byWorker.values()).slice(0, 10);
+    // Include workers with no recent check-in so the timeline reflects the full roster.
+    const roster = await pool.query('SELECT id, name FROM workers ORDER BY id ASC LIMIT 50');
+    for (const worker of roster.rows) {
+      if (!byWorker.has(worker.id)) byWorker.set(worker.id, { worker_id: worker.id, worker_name: worker.name, events: [] });
+    }
+    const series = Array.from(byWorker.values()).slice(0, 50);
 
     res.json({ success: true, data: series, worker_count: series.length, event_count: rows.length });
   } catch (error) {

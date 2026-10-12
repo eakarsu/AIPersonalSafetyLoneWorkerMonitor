@@ -1,7 +1,12 @@
+
+import FullAIExamples, { useFullAIExamples } from "../components/FullAIExamples.jsx";
 import { useState } from 'react';
 import api from '../services/api';
+import AIReport from '../components/AIReport';
 
 export default function RiskAssessToolPage() {
+  const fullAIExamples = useFullAIExamples();
+
   const [form, setForm] = useState({
     location_description: '',
     task_type: '',
@@ -57,7 +62,7 @@ export default function RiskAssessToolPage() {
 
       <div className="bg-white rounded-xl border border-gray-200 p-6">
         <h2 className="text-lg font-semibold text-gray-800 mb-4">Situation Details</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4" data-full-ai-workspace="RiskAssessToolPage"><FullAIExamples controller={fullAIExamples} disabled={Boolean(loading)} />
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Location Description *</label>
@@ -68,7 +73,7 @@ export default function RiskAssessToolPage() {
                 onChange={handleChange}
                 placeholder="e.g., Remote pipeline station, underground mine"
                 required
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" data-full-ai-field={fullAIExamples.bind({ current: form.location_description, change: handleChange, label: "form.location_description", manual: false, json: false, sample: '' }, "p1-2270", undefined)}
               />
             </div>
             <div>
@@ -80,7 +85,7 @@ export default function RiskAssessToolPage() {
                 onChange={handleChange}
                 placeholder="e.g., High voltage maintenance, confined space entry"
                 required
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" data-full-ai-field={fullAIExamples.bind({ current: form.task_type, change: handleChange, label: "form.task_type", manual: false, json: false, sample: '' }, "p1-2839", undefined)}
               />
             </div>
             <div>
@@ -91,7 +96,7 @@ export default function RiskAssessToolPage() {
                 value={form.worker_count}
                 onChange={handleChange}
                 min={1}
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" data-full-ai-field={fullAIExamples.bind({ current: form.worker_count, change: handleChange, label: "form.worker_count", manual: false, json: false, sample: 1 }, "p1-3392", undefined)}
               />
             </div>
             <div>
@@ -100,7 +105,7 @@ export default function RiskAssessToolPage() {
                 name="time_of_day"
                 value={form.time_of_day}
                 onChange={handleChange}
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" data-full-ai-field={fullAIExamples.bind({ current: form.time_of_day, change: handleChange, label: "form.time_of_day", manual: false, json: false, sample: 'daytime' }, "p1-3868", undefined)}
               >
                 <option value="early_morning">Early Morning (5-8am)</option>
                 <option value="daytime">Daytime (8am-5pm)</option>
@@ -117,7 +122,7 @@ export default function RiskAssessToolPage() {
               onChange={handleChange}
               placeholder="e.g., Heavy rain, high winds, extreme temperatures, hazardous chemicals present"
               rows={2}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" data-full-ai-field={fullAIExamples.bind({ current: form.environmental_conditions, change: handleChange, label: "form.environmental_conditions", manual: false, json: false, sample: '' }, "p1-4610", undefined)}
             />
           </div>
           <button
@@ -194,11 +199,12 @@ export default function RiskAssessToolPage() {
                   </div>
                 </div>
               )}
+              <AIReport response={assessment} title="Complete risk assessment" />
             </>
           ) : (
             <div className="bg-white rounded-xl border border-gray-200 p-5">
               <h3 className="font-semibold text-gray-800 mb-3">Risk Assessment</h3>
-              <pre className="whitespace-pre-wrap text-sm text-gray-700 font-mono bg-gray-50 p-3 rounded-lg">{result.raw}</pre>
+              <AIReport response={result.raw} title="Risk assessment" />
             </div>
           )}
         </div>

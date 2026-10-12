@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import api from '../services/api';
+import api, { responseRows } from '../services/api';
 import StatusBadge from '../components/StatusBadge';
 
 export default function CheckInDashboardPage() {
@@ -17,8 +17,8 @@ export default function CheckInDashboardPage() {
         api.get('/api/workers'),
         api.get(`/api/checkins/overdue?interval_minutes=${intervalMinutes}`),
       ]);
-      setWorkers(wRes.data.data || []);
-      setOverdueWorkers(oRes.data.data || []);
+      setWorkers(responseRows(wRes.data));
+      setOverdueWorkers(responseRows(oRes.data));
     } catch (err) {
       console.error('Fetch error:', err);
     } finally {

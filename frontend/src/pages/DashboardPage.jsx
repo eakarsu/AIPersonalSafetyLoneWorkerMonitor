@@ -13,7 +13,7 @@ import {
   Activity,
   Siren,
 } from 'lucide-react';
-import api from '../services/api';
+import api, { responseRows } from '../services/api';
 
 function StatCard({ icon: Icon, label, value, subtitle, color, onClick }) {
   const colorMap = {
@@ -130,10 +130,10 @@ export default function DashboardPage() {
           api.get('/emergencies'),
           api.get('/checkins'),
         ]);
-        setWorkers(wRes.data.data || wRes.data);
-        setIncidents(iRes.data.data || iRes.data);
-        setEmergencies(eRes.data.data || eRes.data);
-        setCheckins(cRes.data.data || cRes.data);
+        setWorkers(responseRows(wRes.data));
+        setIncidents(responseRows(iRes.data));
+        setEmergencies(responseRows(eRes.data));
+        setCheckins(responseRows(cRes.data));
       } catch (err) {
         console.error('Dashboard fetch error:', err);
       } finally {
@@ -199,15 +199,15 @@ export default function DashboardPage() {
 
   const recentIncidents = [...incidents]
     .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
-    .slice(0, 5);
+    .slice(0, 15);
 
   const recentEmergencies = [...emergencies]
     .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
-    .slice(0, 5);
+    .slice(0, 15);
 
   const recentCheckins = [...checkins]
     .sort((a, b) => new Date(b.checked_in_at || b.created_at) - new Date(a.checked_in_at || a.created_at))
-    .slice(0, 5);
+    .slice(0, 15);
 
   return (
     <div className="space-y-6">

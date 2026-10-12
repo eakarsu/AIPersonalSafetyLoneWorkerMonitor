@@ -44,7 +44,7 @@ export default function ShiftRosterExport() {
       // Build a small preview table for display
       const lines = csv.trim().split('\n');
       const header = lines[0].split(',');
-      const dataRows = lines.slice(1, 11).map((l) => l.split(','));
+      const dataRows = lines.slice(1, 16).map((l) => l.split(','));
       setPreview({ header, rows: dataRows, total: lines.length - 1 });
       setLastFile({ name: `shift-roster_${from}_to_${to}.csv`, bytes: csv.length });
     } catch (e) {

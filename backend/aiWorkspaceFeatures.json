@@ -1,0 +1,302 @@
+[
+  {
+    "name": "CFAgenticSafetyOrchestrationPage",
+    "id": "cf-agentic-safety-orchestration",
+    "title": "Agentic safety orchestration",
+    "description": "Prepare a professional advisory report for agentic safety orchestration using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": [
+      {
+        "label": "Scenario",
+        "value": "Run Agentic safety orchestration for a realistic customer case.\nContext: A mid-market operations team is under deadline pressure and needs an actionable recommendation.\nGoal: identify the best next steps, risks, assumptions, and expected business impact.\nOutput format: concise summary, prioritized actions, confidence level, and follow-up questions."
+      },
+      {
+        "label": "Data sample",
+        "value": "Analyze this Agentic safety orchestration data sample.\nRecords:\n- Item A: high priority, owner unassigned, due this week, customer impact high\n- Item B: medium priority, owner assigned, blocked by missing information\n- Item C: low priority, recurring pattern, possible automation candidate\nReturn structured findings, anomalies, recommendations, and a short implementation plan."
+      },
+      {
+        "label": "Executive review",
+        "value": "Prepare an executive review for Agentic safety orchestration.\nAudience: business owner and operations manager.\nInclude: what happened, why it matters, financial or operational impact, risks, and three decisions needed today.\nTone: professional, direct, and implementation-focused."
+      }
+    ]
+  },
+  {
+    "name": "CFBehavioralRiskProfilingPage",
+    "id": "cf-behavioral-risk-profiling",
+    "title": "Behavioral risk profiling",
+    "description": "Prepare a professional advisory report for behavioral risk profiling using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": [
+      {
+        "label": "Scenario",
+        "value": "Run Behavioral risk profiling for a realistic customer case.\nContext: A mid-market operations team is under deadline pressure and needs an actionable recommendation.\nGoal: identify the best next steps, risks, assumptions, and expected business impact.\nOutput format: concise summary, prioritized actions, confidence level, and follow-up questions."
+      },
+      {
+        "label": "Data sample",
+        "value": "Analyze this Behavioral risk profiling data sample.\nRecords:\n- Item A: high priority, owner unassigned, due this week, customer impact high\n- Item B: medium priority, owner assigned, blocked by missing information\n- Item C: low priority, recurring pattern, possible automation candidate\nReturn structured findings, anomalies, recommendations, and a short implementation plan."
+      },
+      {
+        "label": "Executive review",
+        "value": "Prepare an executive review for Behavioral risk profiling.\nAudience: business owner and operations manager.\nInclude: what happened, why it matters, financial or operational impact, risks, and three decisions needed today.\nTone: professional, direct, and implementation-focused."
+      }
+    ]
+  },
+  {
+    "name": "CFComputerVisionIncidentDetectionPage",
+    "id": "cf-computer-vision-incident-detection",
+    "title": "Computer vision incident detection",
+    "description": "Prepare a professional advisory report for computer vision incident detection using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": [
+      {
+        "label": "Scenario",
+        "value": "Run Computer vision incident detection for a realistic customer case.\nContext: A mid-market operations team is under deadline pressure and needs an actionable recommendation.\nGoal: identify the best next steps, risks, assumptions, and expected business impact.\nOutput format: concise summary, prioritized actions, confidence level, and follow-up questions."
+      },
+      {
+        "label": "Data sample",
+        "value": "Analyze this Computer vision incident detection data sample.\nRecords:\n- Item A: high priority, owner unassigned, due this week, customer impact high\n- Item B: medium priority, owner assigned, blocked by missing information\n- Item C: low priority, recurring pattern, possible automation candidate\nReturn structured findings, anomalies, recommendations, and a short implementation plan."
+      },
+      {
+        "label": "Executive review",
+        "value": "Prepare an executive review for Computer vision incident detection.\nAudience: business owner and operations manager.\nInclude: what happened, why it matters, financial or operational impact, risks, and three decisions needed today.\nTone: professional, direct, and implementation-focused."
+      }
+    ]
+  },
+  {
+    "name": "CFEnvironmentalHazardSensingPage",
+    "id": "cf-environmental-hazard-sensing",
+    "title": "Environmental hazard sensing",
+    "description": "Prepare a professional advisory report for environmental hazard sensing using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": [
+      {
+        "label": "Scenario",
+        "value": "Run Environmental hazard sensing for a realistic customer case.\nContext: A mid-market operations team is under deadline pressure and needs an actionable recommendation.\nGoal: identify the best next steps, risks, assumptions, and expected business impact.\nOutput format: concise summary, prioritized actions, confidence level, and follow-up questions."
+      },
+      {
+        "label": "Data sample",
+        "value": "Analyze this Environmental hazard sensing data sample.\nRecords:\n- Item A: high priority, owner unassigned, due this week, customer impact high\n- Item B: medium priority, owner assigned, blocked by missing information\n- Item C: low priority, recurring pattern, possible automation candidate\nReturn structured findings, anomalies, recommendations, and a short implementation plan."
+      },
+      {
+        "label": "Executive review",
+        "value": "Prepare an executive review for Environmental hazard sensing.\nAudience: business owner and operations manager.\nInclude: what happened, why it matters, financial or operational impact, risks, and three decisions needed today.\nTone: professional, direct, and implementation-focused."
+      }
+    ]
+  },
+  {
+    "name": "CFPeerSafetyNetworksPage",
+    "id": "cf-peer-safety-networks",
+    "title": "Peer safety networks",
+    "description": "Prepare a professional advisory report for peer safety networks using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": [
+      {
+        "label": "Scenario",
+        "value": "Run Peer safety networks for a realistic customer case.\nContext: A mid-market operations team is under deadline pressure and needs an actionable recommendation.\nGoal: identify the best next steps, risks, assumptions, and expected business impact.\nOutput format: concise summary, prioritized actions, confidence level, and follow-up questions."
+      },
+      {
+        "label": "Data sample",
+        "value": "Analyze this Peer safety networks data sample.\nRecords:\n- Item A: high priority, owner unassigned, due this week, customer impact high\n- Item B: medium priority, owner assigned, blocked by missing information\n- Item C: low priority, recurring pattern, possible automation candidate\nReturn structured findings, anomalies, recommendations, and a short implementation plan."
+      },
+      {
+        "label": "Executive review",
+        "value": "Prepare an executive review for Peer safety networks.\nAudience: business owner and operations manager.\nInclude: what happened, why it matters, financial or operational impact, risks, and three decisions needed today.\nTone: professional, direct, and implementation-focused."
+      }
+    ]
+  },
+  {
+    "name": "GapComplianceWithoutAuditPage",
+    "id": "gap-compliance-without-audit",
+    "title": "Compliance without '/audit",
+    "description": "Prepare a professional advisory report for compliance without '/audit using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": [
+      {
+        "label": "Scenario",
+        "value": "Run Compliance without '/audit for a realistic customer case.\nContext: A mid-market operations team is under deadline pressure and needs an actionable recommendation.\nGoal: identify the best next steps, risks, assumptions, and expected business impact.\nOutput format: concise summary, prioritized actions, confidence level, and follow-up questions."
+      },
+      {
+        "label": "Data sample",
+        "value": "Analyze this Compliance without '/audit data sample.\nRecords:\n- Item A: high priority, owner unassigned, due this week, customer impact high\n- Item B: medium priority, owner assigned, blocked by missing information\n- Item C: low priority, recurring pattern, possible automation candidate\nReturn structured findings, anomalies, recommendations, and a short implementation plan."
+      },
+      {
+        "label": "Executive review",
+        "value": "Prepare an executive review for Compliance without '/audit.\nAudience: business owner and operations manager.\nInclude: what happened, why it matters, financial or operational impact, risks, and three decisions needed today.\nTone: professional, direct, and implementation-focused."
+      }
+    ]
+  },
+  {
+    "name": "GapEquipmentWithoutEquipmentPage",
+    "id": "gap-equipment-without-equipment",
+    "title": "Equipment without '/equipment",
+    "description": "Prepare a professional advisory report for equipment without '/equipment using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": [
+      {
+        "label": "Scenario",
+        "value": "Run Equipment without '/equipment for a realistic customer case.\nContext: A mid-market operations team is under deadline pressure and needs an actionable recommendation.\nGoal: identify the best next steps, risks, assumptions, and expected business impact.\nOutput format: concise summary, prioritized actions, confidence level, and follow-up questions."
+      },
+      {
+        "label": "Data sample",
+        "value": "Analyze this Equipment without '/equipment data sample.\nRecords:\n- Item A: high priority, owner unassigned, due this week, customer impact high\n- Item B: medium priority, owner assigned, blocked by missing information\n- Item C: low priority, recurring pattern, possible automation candidate\nReturn structured findings, anomalies, recommendations, and a short implementation plan."
+      },
+      {
+        "label": "Executive review",
+        "value": "Prepare an executive review for Equipment without '/equipment.\nAudience: business owner and operations manager.\nInclude: what happened, why it matters, financial or operational impact, risks, and three decisions needed today.\nTone: professional, direct, and implementation-focused."
+      }
+    ]
+  },
+  {
+    "name": "GapLimitedMultiPage",
+    "id": "gap-limited-multi",
+    "title": "Limited multi",
+    "description": "Prepare a professional advisory report for limited multi using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": [
+      {
+        "label": "Scenario",
+        "value": "Run Limited multi for a realistic customer case.\nContext: A mid-market operations team is under deadline pressure and needs an actionable recommendation.\nGoal: identify the best next steps, risks, assumptions, and expected business impact.\nOutput format: concise summary, prioritized actions, confidence level, and follow-up questions."
+      },
+      {
+        "label": "Data sample",
+        "value": "Analyze this Limited multi data sample.\nRecords:\n- Item A: high priority, owner unassigned, due this week, customer impact high\n- Item B: medium priority, owner assigned, blocked by missing information\n- Item C: low priority, recurring pattern, possible automation candidate\nReturn structured findings, anomalies, recommendations, and a short implementation plan."
+      },
+      {
+        "label": "Executive review",
+        "value": "Prepare an executive review for Limited multi.\nAudience: business owner and operations manager.\nInclude: what happened, why it matters, financial or operational impact, risks, and three decisions needed today.\nTone: professional, direct, and implementation-focused."
+      }
+    ]
+  },
+  {
+    "name": "GapNoIntegrationWithEmergencyServices911AutoPage",
+    "id": "gap-no-integration-with-emergency-services-911-auto",
+    "title": "No integration with emergency services (911 auto",
+    "description": "Prepare a professional advisory report for no integration with emergency services (911 auto using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": [
+      {
+        "label": "Scenario",
+        "value": "Run No integration with emergency services (911 auto for a realistic customer case.\nContext: A mid-market operations team is under deadline pressure and needs an actionable recommendation.\nGoal: identify the best next steps, risks, assumptions, and expected business impact.\nOutput format: concise summary, prioritized actions, confidence level, and follow-up questions."
+      },
+      {
+        "label": "Data sample",
+        "value": "Analyze this No integration with emergency services (911 auto data sample.\nRecords:\n- Item A: high priority, owner unassigned, due this week, customer impact high\n- Item B: medium priority, owner assigned, blocked by missing information\n- Item C: low priority, recurring pattern, possible automation candidate\nReturn structured findings, anomalies, recommendations, and a short implementation plan."
+      },
+      {
+        "label": "Executive review",
+        "value": "Prepare an executive review for No integration with emergency services (911 auto.\nAudience: business owner and operations manager.\nInclude: what happened, why it matters, financial or operational impact, risks, and three decisions needed today.\nTone: professional, direct, and implementation-focused."
+      }
+    ]
+  },
+  {
+    "name": "GapNoNativeMobileAppDespiteFieldPage",
+    "id": "gap-no-native-mobile-app-despite-field",
+    "title": "No native mobile app despite field",
+    "description": "Prepare a professional advisory report for no native mobile app despite field using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": [
+      {
+        "label": "Scenario",
+        "value": "Run No native mobile app despite field for a realistic customer case.\nContext: A mid-market operations team is under deadline pressure and needs an actionable recommendation.\nGoal: identify the best next steps, risks, assumptions, and expected business impact.\nOutput format: concise summary, prioritized actions, confidence level, and follow-up questions."
+      },
+      {
+        "label": "Data sample",
+        "value": "Analyze this No native mobile app despite field data sample.\nRecords:\n- Item A: high priority, owner unassigned, due this week, customer impact high\n- Item B: medium priority, owner assigned, blocked by missing information\n- Item C: low priority, recurring pattern, possible automation candidate\nReturn structured findings, anomalies, recommendations, and a short implementation plan."
+      },
+      {
+        "label": "Executive review",
+        "value": "Prepare an executive review for No native mobile app despite field.\nAudience: business owner and operations manager.\nInclude: what happened, why it matters, financial or operational impact, risks, and three decisions needed today.\nTone: professional, direct, and implementation-focused."
+      }
+    ]
+  },
+  {
+    "name": "GapNoNotificationsModuleDedicatedRouteReliesOnPage",
+    "id": "gap-no-notifications-module-dedicated-route-relies-on-",
+    "title": "No notifications module dedicated route (relies on SOS/emergency only)",
+    "description": "Prepare a professional advisory report for no notifications module dedicated route (relies on sos/emergency only) using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": [
+      {
+        "label": "Scenario",
+        "value": "Run No notifications module dedicated route (relies on SOS/emergency only) for a realistic customer case.\nContext: A mid-market operations team is under deadline pressure and needs an actionable recommendation.\nGoal: identify the best next steps, risks, assumptions, and expected business impact.\nOutput format: concise summary, prioritized actions, confidence level, and follow-up questions."
+      },
+      {
+        "label": "Data sample",
+        "value": "Analyze this No notifications module dedicated route (relies on SOS/emergency only) data sample.\nRecords:\n- Item A: high priority, owner unassigned, due this week, customer impact high\n- Item B: medium priority, owner assigned, blocked by missing information\n- Item C: low priority, recurring pattern, possible automation candidate\nReturn structured findings, anomalies, recommendations, and a short implementation plan."
+      },
+      {
+        "label": "Executive review",
+        "value": "Prepare an executive review for No notifications module dedicated route (relies on SOS/emergency only).\nAudience: business owner and operations manager.\nInclude: what happened, why it matters, financial or operational impact, risks, and three decisions needed today.\nTone: professional, direct, and implementation-focused."
+      }
+    ]
+  },
+  {
+    "name": "GapNoRealPage",
+    "id": "gap-no-real",
+    "title": "No real",
+    "description": "Prepare a professional advisory report for no real using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": [
+      {
+        "label": "Scenario",
+        "value": "Run No real for a realistic customer case.\nContext: A mid-market operations team is under deadline pressure and needs an actionable recommendation.\nGoal: identify the best next steps, risks, assumptions, and expected business impact.\nOutput format: concise summary, prioritized actions, confidence level, and follow-up questions."
+      },
+      {
+        "label": "Data sample",
+        "value": "Analyze this No real data sample.\nRecords:\n- Item A: high priority, owner unassigned, due this week, customer impact high\n- Item B: medium priority, owner assigned, blocked by missing information\n- Item C: low priority, recurring pattern, possible automation candidate\nReturn structured findings, anomalies, recommendations, and a short implementation plan."
+      },
+      {
+        "label": "Executive review",
+        "value": "Prepare an executive review for No real.\nAudience: business owner and operations manager.\nInclude: what happened, why it matters, financial or operational impact, risks, and three decisions needed today.\nTone: professional, direct, and implementation-focused."
+      }
+    ]
+  },
+  {
+    "name": "GapNoWearableDeviceIntegrationSmartwatchBeaconPage",
+    "id": "gap-no-wearable-device-integration-smartwatch-beacon",
+    "title": "No wearable device integration (smartwatch, beacon)",
+    "description": "Prepare a professional advisory report for no wearable device integration (smartwatch, beacon) using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": [
+      {
+        "label": "Scenario",
+        "value": "Run No wearable device integration (smartwatch, beacon) for a realistic customer case.\nContext: A mid-market operations team is under deadline pressure and needs an actionable recommendation.\nGoal: identify the best next steps, risks, assumptions, and expected business impact.\nOutput format: concise summary, prioritized actions, confidence level, and follow-up questions."
+      },
+      {
+        "label": "Data sample",
+        "value": "Analyze this No wearable device integration (smartwatch, beacon) data sample.\nRecords:\n- Item A: high priority, owner unassigned, due this week, customer impact high\n- Item B: medium priority, owner assigned, blocked by missing information\n- Item C: low priority, recurring pattern, possible automation candidate\nReturn structured findings, anomalies, recommendations, and a short implementation plan."
+      },
+      {
+        "label": "Executive review",
+        "value": "Prepare an executive review for No wearable device integration (smartwatch, beacon).\nAudience: business owner and operations manager.\nInclude: what happened, why it matters, financial or operational impact, risks, and three decisions needed today.\nTone: professional, direct, and implementation-focused."
+      }
+    ]
+  },
+  {
+    "name": "GapNoWebhooksForExternalDispatchSystemsPage",
+    "id": "gap-no-webhooks-for-external-dispatch-systems",
+    "title": "No webhooks for external dispatch systems",
+    "description": "Prepare a professional advisory report for no webhooks for external dispatch systems using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": [
+      {
+        "label": "Scenario",
+        "value": "Run No webhooks for external dispatch systems for a realistic customer case.\nContext: A mid-market operations team is under deadline pressure and needs an actionable recommendation.\nGoal: identify the best next steps, risks, assumptions, and expected business impact.\nOutput format: concise summary, prioritized actions, confidence level, and follow-up questions."
+      },
+      {
+        "label": "Data sample",
+        "value": "Analyze this No webhooks for external dispatch systems data sample.\nRecords:\n- Item A: high priority, owner unassigned, due this week, customer impact high\n- Item B: medium priority, owner assigned, blocked by missing information\n- Item C: low priority, recurring pattern, possible automation candidate\nReturn structured findings, anomalies, recommendations, and a short implementation plan."
+      },
+      {
+        "label": "Executive review",
+        "value": "Prepare an executive review for No webhooks for external dispatch systems.\nAudience: business owner and operations manager.\nInclude: what happened, why it matters, financial or operational impact, risks, and three decisions needed today.\nTone: professional, direct, and implementation-focused."
+      }
+    ]
+  },
+  {
+    "name": "GapShiftsWithoutBurnoutPage",
+    "id": "gap-shifts-without-burnout",
+    "title": "Shifts without '/burnout",
+    "description": "Prepare a professional advisory report for shifts without '/burnout using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": [
+      {
+        "label": "Scenario",
+        "value": "Run Shifts without '/burnout for a realistic customer case.\nContext: A mid-market operations team is under deadline pressure and needs an actionable recommendation.\nGoal: identify the best next steps, risks, assumptions, and expected business impact.\nOutput format: concise summary, prioritized actions, confidence level, and follow-up questions."
+      },
+      {
+        "label": "Data sample",
+        "value": "Analyze this Shifts without '/burnout data sample.\nRecords:\n- Item A: high priority, owner unassigned, due this week, customer impact high\n- Item B: medium priority, owner assigned, blocked by missing information\n- Item C: low priority, recurring pattern, possible automation candidate\nReturn structured findings, anomalies, recommendations, and a short implementation plan."
+      },
+      {
+        "label": "Executive review",
+        "value": "Prepare an executive review for Shifts without '/burnout.\nAudience: business owner and operations manager.\nInclude: what happened, why it matters, financial or operational impact, risks, and three decisions needed today.\nTone: professional, direct, and implementation-focused."
+      }
+    ]
+  }
+]

@@ -30,7 +30,7 @@ router.get('/', async (req, res) => {
 });
 
 // GET /api/checkins/:id
-router.get('/:id', async (req, res) => {
+router.get('/:id(\\d+)', async (req, res) => {
   try {
     const result = await pool.query('SELECT * FROM check_ins WHERE id = $1', [req.params.id]);
     if (result.rows.length === 0) {

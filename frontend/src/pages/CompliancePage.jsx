@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import api from '../services/api';
+import api, { responseRows } from '../services/api';
 import DataTable from '../components/DataTable';
 import DetailPanel from '../components/DetailPanel';
 import Modal from '../components/Modal';
@@ -32,7 +32,7 @@ export default function CompliancePage() {
     setLoading(true);
     try {
       const res = await api.get('/compliance');
-      setData(res.data);
+      setData(responseRows(res.data));
     } catch (err) {
       console.error('Failed to fetch compliance records:', err);
     } finally {

@@ -13,7 +13,7 @@ export default function DataTable({
 }) {
   const [searchQuery, setSearchQuery] = useState('');
 
-  const filteredData = data.filter((item) => {
+  const filteredData = (Array.isArray(data) ? data : []).filter((item) => {
     if (!searchQuery) return true;
     const query = searchQuery.toLowerCase();
     return columns.some((col) => {

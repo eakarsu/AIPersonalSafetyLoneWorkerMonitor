@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import api from '../services/api';
+import api, { responseRows } from '../services/api';
+import AIReport from '../components/AIReport';
 
 export default function IncidentReportBuilderPage() {
   const [incidents, setIncidents] = useState([]);
@@ -11,7 +12,7 @@ export default function IncidentReportBuilderPage() {
 
   useEffect(() => {
     api.get('/api/incidents').then(res => {
-      setIncidents(res.data.data || []);
+      setIncidents(responseRows(res.data));
     }).catch(() => {}).finally(() => setListLoading(false));
   }, []);
 
@@ -51,6 +52,17 @@ export default function IncidentReportBuilderPage() {
           <div className="text-gray-400 text-sm">Loading incidents...</div>
         ) : (
           <div className="space-y-3">
+            <div className="flex flex-wrap gap-2" aria-label="Incident examples">
+              {['First available incident', 'Second available incident', 'Third available incident'].map((label, index) => (
+                <button key={label} type="button" disabled={loading || incidents.length <= index}
+                  onClick={() => { if (!selectedIncident) setSelectedIncident(String(incidents[index].id)); setResult(null); setError(null); }}
+                  className="px-3 py-2 rounded-lg border border-blue-200 text-blue-700 text-sm">
+                  {label}
+                </button>
+              ))}
+            </div>
+            {!incidents.length && <p className="text-sm text-gray-500">A real incident record is required before a report can be generated.</p>}
+            {incidents.length > 0 && incidents.length < 3 && <p className="text-sm text-gray-500">Additional examples need additional real incident records. Your selected incident is preserved.</p>}
             <select
               value={selectedIncident}
               onChange={(e) => { setSelectedIncident(e.target.value); setResult(null); setError(null); }}
@@ -198,12 +210,13 @@ export default function IncidentReportBuilderPage() {
               </div>
             </div>
           )}
+          <AIReport response={report} title="Complete incident report" />
         </div>
       )}
 
       {result && report && typeof report !== 'object' && (
         <div className="bg-white rounded-xl border border-gray-200 p-5">
-          <pre className="whitespace-pre-wrap text-sm text-gray-700">{result.raw}</pre>
+          <AIReport response={result.raw} title="Incident report" />
         </div>
       )}
     </div>

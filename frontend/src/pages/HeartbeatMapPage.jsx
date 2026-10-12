@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Radio, MapPin, Battery, Clock } from 'lucide-react';
-import api from '../services/api';
+import api, { responseRows } from '../services/api';
 
 function formatTime(dateStr) {
   if (!dateStr) return '-';
@@ -26,7 +26,7 @@ export default function HeartbeatMapPage() {
 
   useEffect(() => {
     api.get('/workers').then((res) => {
-      setWorkers(res.data.data || res.data || []);
+      setWorkers(responseRows(res.data));
     }).catch(console.error).finally(() => setLoading(false));
   }, []);
 
@@ -35,7 +35,7 @@ export default function HeartbeatMapPage() {
     setHistory([]);
     try {
       const res = await api.get(`/workers/${id}/heartbeat-history`);
-      setHistory(res.data.data || res.data || []);
+      setHistory(responseRows(res.data));
     } catch (err) {
       console.error('Heartbeat history error:', err);
     } finally {

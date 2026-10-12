@@ -1,5 +1,12 @@
 import { useState, useEffect } from 'react';
-import api from '../services/api';
+import api, { responseRows } from '../services/api';
+import AIReport from '../components/AIReport';
+
+const emergencyExamples = [
+  { label: 'Medical at remote station', type: 'medical', location: 'Remote pipeline station', description: 'Worker reported dizziness during an isolated inspection; request a welfare check and medical response.' },
+  { label: 'Fire near equipment', type: 'fire', location: 'Electrical maintenance room', description: 'Smoke reported near a breaker cabinet; isolate the area and coordinate site response.' },
+  { label: 'SOS on night patrol', type: 'sos', location: 'Perimeter gate', description: 'Worker activated SOS while on a night patrol and needs immediate contact and location confirmation.' },
+];
 
 export default function EmergencyResponseDisplayPage() {
   const [workers, setWorkers] = useState([]);
@@ -12,7 +19,7 @@ export default function EmergencyResponseDisplayPage() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    api.get('/api/workers').then(res => setWorkers(res.data.data || [])).catch(() => {});
+    api.get('/api/workers').then(res => setWorkers(responseRows(res.data))).catch(() => {});
   }, []);
 
   const handleTrigger = async () => {
@@ -102,6 +109,11 @@ export default function EmergencyResponseDisplayPage() {
           {loading ? 'Generating Emergency Response Plan...' : '🚨 Trigger Emergency & Generate Response Plan'}
         </button>
       </div>
+
+      <div className="flex flex-wrap gap-2" aria-label="Emergency response examples">
+        {emergencyExamples.map((example) => <button key={example.label} type="button" disabled={loading} onClick={() => { setEmergencyType(example.type); setLocation(example.location); setDescription(example.description); setResult(null); setError(null); }} className="px-3 py-2 rounded-lg border border-red-200 text-red-700 text-sm">{example.label}</button>)}
+      </div>
+      {!selectedWorker && <p className="text-sm text-gray-500">Select a real worker before triggering an emergency response.</p>}
 
       {error && <div className="bg-red-50 border border-red-200 rounded-xl p-4 text-red-700">{error}</div>}
 
@@ -227,9 +239,10 @@ export default function EmergencyResponseDisplayPage() {
           ) : result?.response_plan?.raw ? (
             <div className="bg-white rounded-xl border border-gray-200 p-5">
               <h3 className="font-semibold text-gray-800 mb-3">Response Plan</h3>
-              <pre className="whitespace-pre-wrap text-sm text-gray-700 bg-gray-50 p-3 rounded-lg">{result.response_plan.raw}</pre>
+              <AIReport response={result.response_plan.raw} title="Emergency response plan" />
             </div>
           ) : null}
+          {plan && typeof plan === 'object' && <AIReport response={plan} title="Complete emergency response plan" />}
         </div>
       )}
     </div>

@@ -5,6 +5,8 @@ const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
+  // The client baseURL already contains /api; accept legacy call sites with that prefix.
+  if (config.url?.startsWith('/api/')) config.url = config.url.slice(4);
   const token = localStorage.getItem('token');
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
@@ -25,3 +27,8 @@ api.interceptors.response.use(
 );
 
 export default api;
+
+export function responseRows(payload) {
+  const rows = Array.isArray(payload) ? payload : payload?.data;
+  return Array.isArray(rows) ? rows : [];
+}
